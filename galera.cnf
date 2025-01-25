@@ -10,4 +10,3 @@ binlog_format=ROW # This line specifies the binlog format to use
 default_storage_engine=InnoDB # This line specifies the storage engine to use
 innodb_autoinc_lock_mode=2 # This line specifies the autoinc lock mode to use
 bind-address=0.0.0.0 # Allow server to bind to all interfaces
-wsrep_new_cluster=ON  # This line indicates that this node is a bootstrap node
