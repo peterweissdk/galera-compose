@@ -7,14 +7,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    networks:
-      host:
-        aliases:
-          - mariadb
+    network_mode: host
     volumes:
       - ./data:/var/lib/mysql
       - ./galera.cnf:/etc/mysql/conf.d/galera.cnf
-
-networks:
-  host:
-    external: true
