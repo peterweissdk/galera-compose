@@ -1,0 +1,13 @@
+[mysqld]
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+wsrep_cluster_name=galera_cluster
+wsrep_cluster_address=gcomm://
+wsrep_node_name=node1
+wsrep_node_address=127.0.0.1  # Replace with the actual IP address if needed
+wsrep_sst_method=rsync
+binlog_format=ROW
+default_storage_engine=InnoDB
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+wsrep_new_cluster=ON  # This line indicates that this node is a bootstrap node
