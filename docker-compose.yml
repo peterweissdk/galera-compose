@@ -2,6 +2,7 @@
 services:
   mariadb:
     image: mariadb:10.5
+    container_name: mariadb-galera
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
