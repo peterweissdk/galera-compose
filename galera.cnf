@@ -10,3 +10,4 @@ binlog_format=ROW                               # This line specifies the binlog
 default_storage_engine=InnoDB                   # This line specifies the storage engine to use
 innodb_autoinc_lock_mode=2                      # This line specifies the autoinc lock mode to use
 bind-address=0.0.0.0                            # Allow server to bind to all interfaces
+wsrep_new_cluster=OFF                           # Enables/disables the automatic creation of a new cluster
