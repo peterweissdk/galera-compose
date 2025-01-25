@@ -1,13 +1,13 @@
 [mysqld]
-wsrep_on=ON
+wsrep_on=ON # This line enables Galera
 wsrep_provider=/usr/lib/galera/libgalera_smm.so
-wsrep_cluster_name=galera_cluster
-wsrep_cluster_address=gcomm://
-wsrep_node_name=node1
+wsrep_cluster_name=galera_cluster # Replace with your cluster name
+wsrep_cluster_address=gcomm://""  # Replace with the actual IP addresses of the nodes
+wsrep_node_name=node1 # Replace with the name of this node
 wsrep_node_address=127.0.0.1  # Replace with the actual IP address if needed
-wsrep_sst_method=rsync
-binlog_format=ROW
-default_storage_engine=InnoDB
-innodb_autoinc_lock_mode=2
-bind-address=0.0.0.0
+wsrep_sst_method=rsync # This line specifies the SST method to use
+binlog_format=ROW # This line specifies the binlog format to use
+default_storage_engine=InnoDB # This line specifies the storage engine to use
+innodb_autoinc_lock_mode=2 # This line specifies the autoinc lock mode to use
+bind-address=0.0.0.0 # Allow server to bind to all interfaces
 wsrep_new_cluster=ON  # This line indicates that this node is a bootstrap node
