@@ -24,18 +24,24 @@ A MariaDB Galera Cluster setup using Docker Compose.
    # Edit .env with your desired settings
    ```
 
-3. For the first node only, set `wsrep_new_cluster=ON` in galera.cnf to bootstrap the cluster:
+3. Configure the Galera cluster settings in galera.cnf
    ```bash
    # Edit galera.cnf and set
    wsrep_new_cluster=ON  # Set to ON for the first node only
    ```
 
-4. Start the cluster:
+4. Create data directory with correct permissions:
+   ```bash
+   mkdir data
+   sudo chown 999:999 data
+   ```
+
+5. Start the cluster:
    ```bash
    docker compose up -d
    ```
 
-5. After the first node is running, set `wsrep_new_cluster=OFF` and start additional nodes:
+6. After the first node is running, set `wsrep_new_cluster=OFF` and start additional nodes:
    ```bash
    # Edit galera.cnf and set
    wsrep_new_cluster=OFF  # Set back to OFF after cluster is bootstrapped
