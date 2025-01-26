@@ -80,6 +80,7 @@ To manually check cluster health:
 docker compose ps
 # or
 docker ps
+```
 
 The container will be marked as:
 - `healthy`: When the database is responsive
