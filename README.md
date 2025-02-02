@@ -98,6 +98,18 @@ The container will be marked as:
 - `unhealthy`: After 3 failed health checks
 - `starting`: During the initial 30s start period
 
+To manually check the cluster database:
+```bash
+# Size of cluster
+docker exec -it <container_name_or_id> mariadb -u <username> -p -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
+
+# IP adresses of cluster nodes
+docker exec -it <container_name_or_id> mariadb -u <username> -p -e "SHOW STATUS LIKE 'wsrep_incoming_addresses';"
+
+# All information about the cluster
+docker exec -it <container_name_or_id> mariadb -u <username> -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_%';"
+```
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
