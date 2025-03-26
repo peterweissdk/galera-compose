@@ -169,3 +169,4 @@ desync_database
 create_backup
 enable_sync
 log "INFO" "Backup completed successfully"
+exit 0
