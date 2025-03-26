@@ -1,7 +1,7 @@
 #!/bin/bash
 # ----------------------------------------------------------------------------
 # Script Name: backup_galera.sh
-# Description: Tool designed to help you backup a MariaDB Galera cluster
+# Description: Tool designed to help you backup a MariaDB Galera cluster running in a docker container
 # Author: peterweissdk
 # Email: peterweissdk@flems.dk
 # Date: 2025-03-26
