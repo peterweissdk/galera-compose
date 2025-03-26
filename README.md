@@ -76,10 +76,11 @@ Key settings in `galera.cnf`:
 galera-compose/
 ├── data/                # Persistent database storage
 ├── .env                 # Environment variables and secrets
-├── docker-compose.yml    # Main Docker Compose configuration
+├── docker-compose.yml   # Main Docker Compose configuration
 ├── galera.cnf           # MariaDB Galera cluster configuration
-├── LICENSE             # Project license
-└── README.md           # Project documentation
+├── backup_galera.sh     # Backup script
+├── LICENSE              # Project license
+└── README.md            # Project documentation
 ```
 
 ## 🔍 Health Check
@@ -108,6 +109,43 @@ docker exec -it <container_name_or_id> mariadb -u <username> -p -e "SHOW STATUS 
 
 # All information about the cluster
 docker exec -it <container_name_or_id> mariadb -u <username> -p -e "SHOW GLOBAL STATUS LIKE 'wsrep_%';"
+```
+
+## 📦 Backup
+
+The project includes a backup script (`backup_galera.sh`) that safely creates backups of your Galera cluster:
+
+1. Make the script executable:
+   ```bash
+   chmod +x backup_galera.sh
+   ```
+
+2. Run the backup:
+   ```bash
+   ./backup_galera.sh
+   ```
+
+The script will:
+- Create backup and log directories
+- Desynchronize the node to ensure consistent backup
+- Create a MariaDB dump of all databases
+- Create a compressed archive
+- Re-synchronize the node with the cluster
+- Log all operations
+
+Backups and Logs are stored in the following structure:
+```
+backup/
+├── temp/                          # Temporary storage for database dumps
+└── galera-backup-YYYYMMDD.tar.gz  # Compressed backup archive
+logs/
+└── galera_backup.log              # Log file
+```
+
+You can also add the script to cron for automated backups:
+```bash
+# Example: Run backup daily at 2 AM
+0 2 * * * /path/to/backup_galera.sh
 ```
 
 ## 🤝 Contributing
