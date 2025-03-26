@@ -9,10 +9,13 @@
 # Usage: Run script, or add it to cron
 # ----------------------------------------------------------------------------
 
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Variables
-BACKUP_DIR='/backup'
+BACKUP_DIR="${SCRIPT_DIR}/backup"
 BACKUP_SUB_DIR='temp'
-LOG_DIR='/logs'
+LOG_DIR="${SCRIPT_DIR}/logs"
 LOG_FILE="${LOG_DIR}/galera_backup.log"
 MAX_DESYNC_WAIT=30  # Maximum wait time in seconds for desync
 MAX_SYNC_WAIT=60  # Maximum wait time in seconds for sync
@@ -61,11 +64,11 @@ init() {
     fi
     
     # Source environment variables
-    if [ -f .env ]; then
-        source .env
+    if [ -f "${SCRIPT_DIR}/.env" ]; then
+        source "${SCRIPT_DIR}/.env"
         log "INFO" "Environment variables loaded successfully"
     else
-        log "ERROR" "Environment file (.env) not found"
+        log "ERROR" "Environment file (.env) not found in ${SCRIPT_DIR}"
         exit 1
     fi
 
