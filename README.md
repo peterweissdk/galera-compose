@@ -15,6 +15,8 @@ A MariaDB Galera Cluster setup using Docker Compose.
 - Environment-based configuration
 - Persistent data storage
 - Custom Galera configuration
+- Database reset script
+- Database backup script
 
 ## 🚀 Quick Start
 
