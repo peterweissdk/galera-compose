@@ -117,6 +117,7 @@ docker exec -it <container_name_or_id> mariadb -u <username> -p -e "SHOW GLOBAL 
 
 The project includes a backup script (`backup_galera.sh`) that safely creates backups of your Galera cluster:
 
+### Backup
 1. Make the script executable:
    ```bash
    chmod +x backup_galera.sh
@@ -125,6 +126,29 @@ The project includes a backup script (`backup_galera.sh`) that safely creates ba
 2. Run the backup:
    ```bash
    ./backup_galera.sh
+   ```
+
+### Restore
+1. Bind mount the backup directory to the container:
+   ```bash
+   ./backup:/backup
+   ```
+2. Untar the dump file:
+   ```bash
+   tar -xvzf /backup/galera-backup-YYYYMMDD.tar.gz
+   ```
+3. Enter the container:
+   ```bash
+   docker exec -it mariadb-galera /bin/bash
+   ```
+4. Restore the database:
+   ```bash
+   mariadb -u root -p < /backup/galera-backup-YYYYMMDD.sql
+   ```
+5. Note:
+   ```bash
+   You might need to set wsrep_new_cluster=ON in galera.cnf to get the container up and running,
+   before entering the container.
    ```
 
 The script will:
