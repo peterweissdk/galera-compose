@@ -72,8 +72,6 @@ if [ "$start_container" = "yes" ]; then
     echo "  docker compose ps"
     echo "To check the logs, use:"
     echo "  docker compose logs -f"
-    echo "To check if MariaDB is ready, use:"
-    echo "  docker compose exec mariadb mysqladmin ping -h localhost"
 else
     echo -e "\n✅ Setup complete! To start the container later, run:"
     echo "  docker compose up -d"
