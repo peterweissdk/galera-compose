@@ -16,11 +16,17 @@ if [ $(docker compose ps | grep -q "mariadb") ]; then
     docker compose down
 fi
 
-# Ask about container deletion
-read -p "Do you want to delete the old mariadb:lts-noble container? (Recommended) (yes/no): " delete_container
-if [ "$delete_container" = "yes" ]; then
-    echo "Removing MariaDB container..."
-    docker rm -f $(docker ps -a | grep "mariadb:lts-noble" | awk '{print $1}') 2>/dev/null || true
+# Check for and handle old container deletion
+old_container=$(docker ps -a | grep "mariadb:lts-noble" | awk '{print $1}')
+if [ ! -z "$old_container" ]; then
+    echo "Found existing MariaDB container: $old_container"
+    read -p "Do you want to delete the old mariadb:lts-noble container? (Recommended) (yes/no): " delete_container
+    if [ "$delete_container" = "yes" ]; then
+        echo "Removing MariaDB container..."
+        docker rm -f $old_container
+    fi
+else
+    echo "No existing MariaDB container found."
 fi
 
 # Delete and recreate data directory
@@ -60,6 +66,8 @@ if [ "$start_container" = "yes" ]; then
     echo "  docker compose ps"
     echo "To check the logs, use:"
     echo "  docker compose logs -f"
+    echo "To check if MariaDB is ready, use:"
+    echo "  docker compose exec mariadb mysqladmin ping -h localhost"
 else
     echo -e "\n✅ Setup complete! To start the container later, run:"
     echo "  docker compose up -d"
