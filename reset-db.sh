@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if running as root
+if [ "$(id -u)" != "0" ]; then
+    echo "This script must be run as root (sudo)" 1>&2
+    exit 1
+fi
+
 echo "⚠️  Database Reset Script ⚠️"
 echo "This script will reset your database environment."
 
