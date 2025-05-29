@@ -17,7 +17,7 @@ if [ "$proceed" != "yes" ]; then
 fi
 
 # Check and stop running containers
-if [ $(docker compose ps | grep -q "mariadb") ]; then
+if docker compose ps | grep -q "mariadb"; then
     echo "Stopping MariaDB container..."
     docker compose down
 fi
